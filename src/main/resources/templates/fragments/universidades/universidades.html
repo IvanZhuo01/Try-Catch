@@ -1,0 +1,36 @@
+<div th:fragment="universidades" id="universidades">
+    <script th:src="@{/js/universidades.js}"></script>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="search-box col-6">
+                <form>
+                    <input name="query" type="search" placeholder="Busca una universidad..." oninput="searchUniversidades(event, createContent)">
+                    <button class="search-btn"><i class="bi bi-search" style="color:black"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <div class="mb-3 ms-2">
+            <hr>
+            <h4 class="mt-1">Destacadas:<h4></div>
+
+        <div class="row" id="unisContainer" >
+
+            <div class="col-md-4 mb-3" th:each="universidad: ${universidades}">
+                <div class="card university-card">
+                    <img th:src="@{/user/universidad/__${universidad.id}__/pic}" class="card-img-top p-2" alt="imagen universidad" style="height: 40%;">
+                    
+                    <div class="card-body">
+                        <h5 th:if="${session.u} and ${session.u.hasRole('ADMIN')}" class="card-title"><a th:text="${universidad.nombre}" th:href="@{/admin/universidades/__${universidad.id}__/}">Universidad</a></h5>
+                        <h5 th:unless="${session.u} and ${session.u.hasRole('ADMIN')}" class="card-title"><a th:text="${universidad.nombre}" th:href="@{/universidades/__${universidad.id}__/}">Universidad</a></h5>
+                        <div class="d-flex">
+                            <p><i class="bi bi-geo-alt-fill"></i><p class="university-data card-text m-0" th:text="${universidad.localizacion}"> localizacion</p></p>
+                        </div>
+                        <p class="university-data" th:text="${#strings.abbreviate(universidad.descripcion,50)}">descripcion</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

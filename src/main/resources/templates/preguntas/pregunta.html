@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <link rel="stylesheet" th:href="@{/css/pregunta.css}">
+    <script th:src="@{/js/votaciones.js}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+    <script th:src="@{/js/modalNotificacion.js}"></script>
+</head>
+
+<body>
+    <header th:replace="fragments/nav.html :: nav"></header>
+    <div th:if="${error != null}" class="d-flex flex-column justify-content-center align-items-center notfound" style="background-color: #b5d4dd;">
+        <h3>Parece que esta pregunta no existe...</h3>
+        <img src="https://cdn.dribbble.com/users/2594343/screenshots/6537210/404-animation-cat.gif" alt="">
+    </div>
+    <div th:unless="${error != null}" class="container-fluid mt-4">
+        <div class="offset-3 col-6 bg-white p-4 border rounded shadow-sm">
+            <div class="d-flex p-3 border-bottom-0 gap-4 justify-content-between">
+                <div class="title-wrapper w-100">
+                    <h4 th:text="${pregunta.titulo}" class="modal-title fs-5 w-100" id="exampleModalLabel">Titulo</h4>
+                    <div>
+                        <span th:each="etiq: ${pregunta.etiquetas}" th:text="${etiq}"
+                            class="badge bg-primary me-1"></span>
+                    </div>
+                </div>
+                <div th:if=" ${session.u} and ${ session.u.hasRole('ADMIN')}"
+                    th:replace="fragments/preguntas/borrarPregunta.html :: borrarPregunta">
+                </div>
+                <div class="d-flex">
+                    <div th:if=" ${session.u} and ${ session.u.hasRole('ADMIN')}" class="me-2">
+                        <!-- class="delete-post" -->
+                        <button class="delete-post" data-bs-toggle="modal" data-bs-target="#borrarPreguntaModal"
+                            th:onclick="'borrarPreguntaModalAdmin('+${pregunta.id}+')'">
+                            <i class="bi bi-trash3-fill"></i>
+                        </button>
+                    </div>
+                    <div th:if="${session.u} and ${session.u.id == pregunta.usuario.id}" class="dropdown ms-2">
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="dropdown" aria-expanded="false"><i
+                                class="bi bi-three-dots-vertical"></i></button>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-trash">
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#borrarPreguntaModal"
+                                    th:onclick="'borrarPreguntaModal('+${pregunta.id}+')'">Borrar Pregunta <i
+                                        class="bi bi-trash3-fill"></i></a></li>
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#crearPregunta"
+                                    th:onclick="'modoEditarPregunta('+${pregunta.id}+')'">Editar Pregunta <i
+                                        class="bi bi-pen"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-row align-items-center mt-2" th:data-idres="${pregunta.id}">
+                <div class="d-flex flex-column align-items-center panelVots">
+                    <div th:if=" ${session.u} and ${ session.u.username != pregunta.usuario.username}">
+                        <button class="btn btn-sm btn-outline-primary" id="likebutton" name="like"
+                            th:onclick="'voteLike('+${pregunta.id}+')'">
+                            <h5 class="m-0"><i class="bi bi-caret-up"></i></h5>
+                        </button>
+                    </div>
+                    <h4 class="mt-2 text-primary" th:text="${pregunta.numVotaciones}">0</h4>
+                    <div th:if=" ${session.u} and ${ session.u.username != pregunta.usuario.username}">
+                        <button class="btn btn-sm btn-outline-primary" id="dislikebutton" name="dislike"
+                            th:onclick="'voteDislike('+${pregunta.id}+')'">
+                            <h5 class="m-0"><i class="bi bi-caret-down"></i></h5>
+                        </button>
+                    </div>
+                </div>
+                <div class="cuerpo-pregunta border p-3 rounded shadow-sm h-100"
+                    th:if="${pregunta.cuerpo.length() gt 0}">
+                    <p th:utext="${pregunta.cuerpo}" class="cuerpoPreg m-1 ">
+                        Cuerpo
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-3 d-flex align-items-center ms-3" th:if="${fichero} and not ${pregunta.embebImg}">
+                <i class="bi bi-cloud-arrow-down"></i> <a th:href="@{/aportacion/__${pregunta.id}__/file}"
+                    th:text="${fichero}" class="ms-2" th:download="${fichero}"></a>
+            </div>
+
+            <div class="mt-3 d-flex align-items-center ms-3" th:if="${fichero} and ${pregunta.embebImg}">
+                <img th:src="@{/aportacion/__${pregunta.id}__/file}" style="max-width: 800px; max-height: 600px">
+            </div>
+            <div class=" d-flex flex-column align-items-end">
+                <div class="user-stats mt-3">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <!-- Foto -->
+                        <div class="stats position-relative">
+                            <a th:href="@{/perfil/__${pregunta.usuario.id}__}">
+                                <img th:src="@{/user/__${pregunta.usuario.id}__/pic}" width="40" height="40"
+                                    class="rounded-circle me-3 border" alt="user image">
+                                <span th:if="${pregunta.usuario.roles.contains('PROFESOR')}">
+
+                                    <button class="verificado" data-bs-toggle="tooltip" data-bs-placement="left"
+                                        title="Este usuario es Profesor">
+                                        <i class="bi bi-patch-check-fill"></i>
+                                    </button>
+
+                                </span>
+                            </a>
+                        </div>
+                        <!-- Nombre de usuario -->
+                        <!-- <a th:href="@{/perfil/__${pregunta.usuario.id}__}"> -->
+                        <div th:text="${pregunta.usuario.username}" class=""></div>
+                        <!-- </a> -->
+
+                        <div th:if=" ${session.u} and ${ session.u.username != pregunta.usuario.username}"
+                            class="dropdown ms-2">
+                            <span class="badge rounded-pill text-bg-primary" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical"></i>
+                            </span>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#notificacion"
+                                        th:onclick="'notificacionReportarUsu('+${pregunta.usuario.id}+')'">Reportar
+                                        Usuario <i class="bi bi-exclamation-circle"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- nivel  -->
+                    <div>
+                        <p class="mb-0"> <span>Nivel <i class="bi bi-stars amarillo"></i> </span> <span
+                                th:data-idUsuP="${pregunta.usuario.id}" th:data-idUsu="${pregunta.usuario.id}" th:text="${pregunta.usuario.nivel}">0</span></p>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <hr>
+            <h5>Respuestas de Usuarios:</h5>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span th:text="${pregunta.respuestas.size() + ' respuestas'}" class="badge bg-primary"></span>
+                <div th:if="${session.u}"><button id="responderButton" class="btn btn-outline-warning mt-2"
+                        data-bs-toggle="modal" data-bs-target="#responder">Responder <i
+                            class="bi bi-arrow-return-left"></i></button></div>
+
+            </div>
+
+            <div th:each="res: ${pregunta.respuestas}" class="border p-3 rounded shadow-sm mb-2"
+                th:data-idres="${res.id}">
+                <div class="d-flex flex-row">
+                    <div class="d-flex flex-column align-items-center justify-content-center me-4">
+
+                        <div class="d-flex flex-column align-items-center mt-3 panelVots">
+                            <!-- <p class="m-0 me-2" th:text="${res.numVotaciones}"></p> -->
+                            <div th:if="${session.u} and ${ session.u.username != res.usuario.username}" class="res">
+                                <button class="btn btn-sm btn-outline-primary" id="likebutton" name="like"
+                                    th:onclick="'voteLike('+${res.id}+')'">
+                                    <h5 class="m-0"><i class="bi bi-caret-up"></i></h5>
+                                </button>
+                            </div>
+                            <h4 class="mt-2 text-primary" th:text="${res.numVotaciones}">0</h4>
+                            <div th:if="${session.u} and ${ session.u.username != res.usuario.username}">
+                                <button class="btn btn-sm btn-outline-primary" id="dislikebutton" name="dislike"
+                                    th:onclick="'voteDislike('+${res.id}+')'">
+                                    <h5 class="m-0"><i class="bi bi-caret-down"></i></h5>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="d-flex align-items-center w-100">
+                        <p th:text="${res.cuerpo}" class="cuerpoPreg m-1">
+                            cuerpo
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div th:if=" ${session.u} and ${ session.u.hasRole('ADMIN')}" class="me-2">
+                            <!-- class="delete-post" -->
+                            <button class="delete-post" data-bs-toggle="modal" data-bs-target="#borrarPreguntaModal"
+                                th:onclick="'borrarPreguntaModalAdmin('+${res.id}+')'">
+                                <i class="bi bi-trash3-fill"></i>
+                            </button>
+                        </div>
+                        <div th:if="${session.u} and ${session.u.id == res.usuario.id}" class="dropdown ms-2">
+                            <button class="btn btn-sm btn-primary" data-bs-toggle="dropdown" aria-expanded="false"><i
+                                    class="bi bi-three-dots-vertical"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-trash">
+                                <li><a class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#borrarPreguntaModal"
+                                        th:onclick="'borrarPreguntaModal('+${res.id}+')'">Borrar Respuesta <i
+                                            class="bi bi-trash3-fill"></i></a></li>
+                                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#responder"
+                                        th:onclick="'modoEditarRespuesta('+${res.id}+')'">Editar Respuesta <i
+                                            class="bi bi-pen"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex flex-column align-items-end">
+                    <div class="user-stats mt-3">
+                        <div class=" d-flex align-items-center justify-content-end">
+                            <div class="position-relative">
+                                <a th:href="@{/perfil/__${res.usuario.id}__}">
+                                    <img th:src="@{/user/__${res.usuario.id}__/pic}" width="40" height="40"
+                                        class="border rounded-circle me-3" alt="user image">
+                                    <span th:if="${res.usuario.roles.contains('PROFESOR')}">
+                                        <button class="verificado" data-bs-toggle="tooltip" data-bs-placement="left"
+                                            title="Este usuario es Profesor">
+                                            <i class="bi bi-patch-check-fill"></i>
+                                        </button>
+
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="d-flex">
+
+                                <p class="m-0" th:text="${res.usuario.username}">userName</p>
+                                <div th:if=" ${session.u} and ${ session.u.username != pregunta.usuario.username}"
+                                    class="dropdown ms-2">
+                                    <span class="badge rounded-pill text-bg-primary" data-bs-toggle="dropdown"
+                                        aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical"></i>
+                                    </span>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" data-bs-toggle="modal"
+                                                data-bs-target="#notificacion"
+                                                th:onclick="'notificacionReportarUsu('+${res.usuario.id}+')'">Reportar
+                                                Usuario</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <p> <span>Nivel <i class="bi bi-stars amarillo"></i> </span> <span
+                                th:data-idUsuP="${res.usuario.id}"  th:data-idUsu="${res.usuario.id}" th:text="${res.usuario.nivel}">0</span></p>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+<div th:if="${session.u}">
+    <div th:replace="fragments/preguntas/crearRespuesta.html :: div">
+
+    </div>
+    <div th:replace="fragments/notificaciones/modalNotificacion.html :: modalPNotificacion">
+
+    </div>
+</div>
+
+<div th:if="${session.u} and ${session.u.id == pregunta.usuario.id}"
+    th:replace="fragments/preguntas/crearPregunta.html :: modalPregunta"></div>
+
+</html>

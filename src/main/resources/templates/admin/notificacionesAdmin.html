@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <link rel="stylesheet" th:href="@{/css/notificacionesAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+<!-- Notificaciones websockets admin -->
+
+<body>
+
+    <div id="admin">
+        <div th:replace="fragments/sidebarAdmin.html :: sidebarAdmin"></div>
+        <div id="main">
+            <div th:replace="fragments/headerAdmin.html :: headerAdmin"></div>
+
+            <div class="p-4">
+
+                <div class="modal-notificaciones">
+
+                    <div class="titulo-modal">Notificaciones para gestionar</div>
+                    <!-- Esqueleto Notificacion  -->
+                    <th:block th:each="notificacion,i: ${notificaciones}">
+                        <div class="notificacion">
+                            <div class="info-container" data-bs-toggle="modal"
+                                th:data-bs-target="'#exampleModal-'+${notificacion.getId()}">
+                                <span class="topic" th:text="${notificacion.getTopic()}">Titulo</span>
+                                <span class="titulo" th:text="${notificacion.getTitulo()}">Titulo</span>
+                                <span class="descripcion" th:text="${notificacion.getCuerpo()}">Lorem ipsum dolor sit
+                                    amet consectetur adipisicing elit. Hic saepe asperiores, tempore officiis ipsam
+                                    dolores placeat dolorum fugit! Quibus...</span>
+                                <span class="emisor">Notificado por <span class="nombre"
+                                        th:text="${notificacion.getSender().getUsername()}">@Usuario</span></span>
+                            </div>
+                            <div class="button-container">
+                                <button th:onClick="'asignar(' + ${notificacion.getId()} + ')'"><i class="bi bi-archive-fill"></i></button>
+                            </div>
+                        </div>
+                    </th:block>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- modal -->
+    <th:block th:each="notificacion,i: ${notificaciones}">
+        <div class="modal fade" th:id="'exampleModal-'+${notificacion.getId()}" tabindex="-1"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+
+                    <div class="modal-header">
+                        <button type="button" th:class="'btn-close-'+${notificacion.getId()}" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+
+                        <div class="notificacion">
+
+                            <div class="notificacionFull shadow-sm rounded">
+                                <span class="titulo" th:text="${notificacion.getTitulo()}">Titulo</span>
+                                <span class="descripcion" th:text="${notificacion.getCuerpo()}">Lorem ipsum dolor sit
+                                    amet consectetur adipisicing elit. Amet veniam magnam dignissimos? Atque eum quo
+                                    aperiam cumque a nemo id dolor temporibus iure amet enim expedita, alias quasi nisi
+                                    reiciendis!</span>
+                                <div class="emisorYfecha">
+                                    <span class="emisor">Notificado por <span class="nombre"
+                                            th:text="${notificacion.getSender().getUsername()}">@Usuario</span></span>
+                                    <span class="fecha"
+                                        th:text="${#temporals.format(notificacion.getDateSent(),'HH:mm')}">9:51
+                                        AM</span>
+                                </div>
+
+                                <div class="botones-container">
+                                    <button class="volver"
+                                        th:onClick="'cierraModal(' + ${notificacion.getId()} + ')'">Volver atrás <i
+                                            class="bi bi-archive-fill"></i></button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </th:block>
+
+
+</body>
+
+</html>

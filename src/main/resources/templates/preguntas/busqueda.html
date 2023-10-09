@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/busqueda.css}" href="css/busqueda.css" type="text/css" />
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+
+    <div id="busqueda">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12 col-lg-7">
+
+                    <div class="card shadow mb-3">
+                        <div class="card-body">
+                            <p>Archivos encontrados:</p>
+
+                            <div th:if="${preguntasConFichero.size > 0}" class="documento-card"
+                                th:each="filePreg: ${preguntasConFichero}">
+                                <div class="documento">
+                                    <!-- <img th:src="@{/img/documento1.PNG}" src="/img/documento1.PNG" alt=""> -->
+                                </div>
+
+                                <div class="derecha">
+                                    <div class="top">
+                                        <p th:text="${filePreg.titulo}" class="titulo">Examen parcial 2017 FAL</p>
+                                        <p class="universidad">Universidad Complutense de Madrid</p>
+                                    </div>
+
+                                    <div class="bottom">
+                                        <a th:href="@{/perfil/__${filePreg.usuario.id}__}"
+                                            th:text="'@'+${filePreg.usuario.username}">@User_01</a>
+                                        <!-- <i class="bi bi-file-earmark"></i> <span> 2 paginas</span> -->
+                                        <br>
+                                        <!-- <span class="fecha"><i class="bi bi-filetype-pdf"></i> 01/12/2018</span> -->
+                                    </div>
+                                </div>
+
+                                <div class="iconos">
+                                    <i class="bi bi-download"></i>
+                                    <a th:href="@{/aportacion/__${filePreg.id}__/file}" th:text="${filePreg.fichero}"
+                                        class="ms-2" th:download="${filePreg.fichero}"></a>
+                                </div>
+                            </div>
+
+                            <div th:unless="${preguntasConFichero.size > 0}" class="documento-card">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <p class="m-3">Parece que todavia nadie ha subido ficheros sobre esta materia...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow mb-3">
+                        <div class="card-body">
+                            <p>Se han encontrado: <span th:text="${maxResults}">0</span> resultados</p>
+
+                            <div class="pregunta-card" th:each="pregunta: ${preguntas}">
+                                <a class="titleLink" th:href="@{/preguntas/__${pregunta.id}__}">
+                                    <p class="titulo" th:text="${pregunta.titulo}">Titulo</p>
+                                </a>
+                                <!-- <p class="asignatura">Asignatura: <span th:text="${pregunta.asignatura}">Asignatura</span></p> -->
+
+                                <div class="pregunta-footer">
+                                    <div class="izquierda">
+
+                                        <div class="usuario">
+                                            <img th:src="@{/img/pf.jpg}" src="/img/pf.jpg" alt="">
+                                            <span class="username" th:text="${pregunta.usuario.username}">@User</span>
+                                        </div>
+
+                                        <div class="num-respuestas">
+                                            <span> <span th:text="${pregunta.respuestas.size()}"></span>
+                                                Respuestas</span>
+                                            <i class="bi bi-check-circle-fill"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="derecha">
+                                        <span class="badge bg-primary" th:each="etiqueta: ${pregunta.etiquetas}"
+                                            th:text="${etiqueta}">Tag</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="pages">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li th:class="${page < 2} ? 'page-item disabled' : 'page-item'" class="page-item"><a
+                                        class="page-link"
+                                        th:href="@{/busqueda?query=__${query}__&page=__${page - 1}__}">Previous</a></li>
+                                <li class="page-item"><a class="page-link"
+                                        th:href="@{/busqueda?query=__${query}__&page=__${page - 1}__}"
+                                        th:if="${page > 1}" th:text="${page - 1}">1</a></li>
+                                <li class="page-item"><a class="page-link active"
+                                        th:href="@{/busqueda?query=__${query}__&page=__${page}__}"
+                                        th:text="${page}">2</a></li>
+                                <li th:class="${page * 6 >= maxResults} ? 'page-item disabled' : 'page-item'" class="page-item"><a class="page-link"
+                                        th:href="@{/busqueda?query=__${query}__&page=__${page + 1}__}"
+                                        th:text="${page + 1}">3</a></li>
+                                <li th:class="${page * 6 >= maxResults} ? 'page-item disabled' : 'page-item'" class="page-item"><a class="page-link"
+                                        th:href="@{/busqueda?query=__${query}__&page=__${page + 1}__}">Next</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="offset-lg-1 col-lg-4">
+                    <div class="card" style="background: #b9cfca">
+                        <div class="card-body">
+                            <p><strong>Actividad reciente</strong></p>
+
+                            <div class="actividad-reciente-card" th:each="pregunta: ${preguntasRecientes}">
+
+                                <div class="body">
+                                    <a class="titleLink" th:href="@{/preguntas/__${pregunta.id}__}">
+                                        <div class="izquierda">
+
+                                            <p class="titulo" th:text="${pregunta.titulo}">Titulo</p>
+
+                                            <p class="descripcion" th:text="${pregunta.cuerpo}">Lorem ipsum dolor sit
+                                                amet
+                                                consectetur adipisicing elit. Amet, obcaecati exercitationem quam iusto
+                                                dicta vel...</p>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="footer">
+                                    <div class="num-respuestas">
+                                        <span><span th:text="${pregunta.respuestas.size()}">0</span> respuestas</span>
+                                    </div>
+
+                                    <div class="etiquetas">
+                                        <span class="badge bg-primary" th:each="etiqueta: ${pregunta.etiquetas}"
+                                            th:text="${etiqueta}">Tag</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <th:block th:if="${session.u}">
+            <div class="boton-flotante" data-bs-toggle="modal" data-bs-target="#crearPregunta">
+                <i class="bi bi-plus-circle-fill"></i>
+                <span>Sube nuevos archivos o haz una nueva pregunta</span>
+            </div>
+            <div th:replace="fragments/preguntas/crearPregunta.html :: div"></div>
+        </th:block>
+
+    </div>
+    <th:block th:replace="fragments/footer.html :: footer" />
+</body>
+
+</html>

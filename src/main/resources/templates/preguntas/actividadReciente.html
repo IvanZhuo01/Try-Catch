@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/preguntas.css}" href="css/preguntas.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/busqueda.css}" href="css/busqueda.css" type="text/css" />
+    <script th:src="@{/js/errores.js}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+</head>
+
+<body>
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+    <section class="miseccion">
+        <h2 class="title">Usa <span id="bolder" class="T">Try </span>&<span id="bolder" class="C"> Catch</span>, no te
+            quedes con la duda</h2>
+        <div class="search-box">
+            <form action="/busqueda">
+                <input autocomplete="off" name="query" type="search"
+                    placeholder="Busca entre archivos, asignaturas o preguntas...">
+                <button class="search-btn"><i class="bi bi-search" style="color:black"></i></button>
+            </form>
+            <div class="last-questions-instruction">
+                <div class="container text-center rectangle d-flex justify-content-evenly">
+                    <div class="row">
+                        <div class="col-12 col-md-4 text-align-justify">
+                            <img src="/img/questions/question.jpg" alt="" class="img-instruction rounded-circle">
+                            <p id="bolder">
+                                Resuelve tus dudas
+                            </p>
+                            <p>
+                                Inicia sesion y da click en el boton naranja para hacer una pregunta. ¡Personalizala con
+                                tags para obtener una respuesta más rapida!
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <img src="/img/questions/reply.jpg" alt="" class="img-instruction rounded-circle">
+                            <p id="bolder">
+                                Resuelve las dudas
+                            </p>
+                            <p>
+                                Responde a las preguntas que la comunidad de estudiantes haya formulado para obtener
+                                experiencia y subir de nivel.
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <img src="/img/questions/review.jpg" alt="" class="img-instruction rounded-circle">
+                            <p id="bolder">
+                                ¿Cómo de buenas son las respuestas que has visto?
+                            </p>
+                            <p>
+                                Califica la exactitud de las respuestas que encuentras a las preguntas que encuentres
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <article class="bg-white">
+        <div class="container justify-content-around">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="title"> Últimas preguntas </h2>
+                </div>
+            </div>
+        </div>
+    </article>
+    <!-- seccion de como funcionan las preguntas -->
+    <article class="quest-container bg-white">
+        <div class="container justify-content-around">
+            <div class="row quest-box">
+                <div id="question-box" class="question-box col-md-5 col-sm-12"
+                    th:each="pregunta, index :${preguntas_rec}"
+                    th:class="${index.even}? 'question-box col-md-5 col-sm-12 offset-2' : 'question-box col-md-5 col-sm-12'">
+                    <div class="row">
+                        <a th:href="@{/preguntas/__${pregunta.id}__}">
+                            <h3 class="quest-title" th:text="${pregunta.titulo}">Titulo de pregunta</h3>
+                            <p id="quest-body" class="quest-body" th:text="${pregunta.cuerpo}">Lorem ipsum dolor sit
+                                amet consectetur
+                                esto es un texto de prueba
+                            </p>
+                        </a>
+                    </div>
+                    <div>
+                        <span class="badge bg-primary me-2" th:each="etiqueta: ${pregunta.etiquetas}"
+                                            th:text="${etiqueta}">Tag</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <div th:if="${session.u}">
+        <div class="boton-flotante" data-bs-toggle="modal" data-bs-target="#crearPregunta">
+            <i class="bi bi-plus-circle-fill"></i>
+            <span>Sube nuevos archivos o haz una nueva pregunta</span>
+        </div>
+
+
+        <div th:replace="fragments/preguntas/crearPregunta.html :: modalPregunta"></div>
+
+    </div>
+    <script th:if="${errors != null}">
+        mostrarNotificaciones('[(${errors})]');
+    </script>
+    <th:block th:replace="fragments/footer.html :: footer" />
+</body>
+
+</html>

@@ -1,0 +1,230 @@
+/* Aspectos generales */
+
+body {
+    overflow: hidden;
+}
+
+.morado {
+    color: #525CA9;
+}
+
+#admin-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+}
+
+#usuarios {
+    position: relative;
+    height: 35%;
+    margin: 30px 0;
+}
+
+#actividad {
+    height: 50%;
+    margin: 30px 0;
+}
+
+/* Parte superior */
+.parte-superior {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background-color: white;
+    border-radius: 25px 25px 0px 0px;
+}
+
+
+.buscador input {
+    background-color: #F6F5F5;
+    margin-top: 0.5rem;
+    height: 3rem;
+}
+
+
+
+.buscador button {
+    height: 3rem;
+    background-color: #F6F5F5;
+    margin-top: 0.2rem;
+    width: 25%;
+}
+
+.buscador input:hover,
+.buscador button:hover,
+.buscador input:focus,
+.buscador button:focus {
+    box-shadow: none;
+}
+
+table {
+    width: 98%;
+}
+
+.tabla-encabezado th {
+    font-weight: bolder;
+}
+
+.tabla-encabezado th,
+.tabla-contenido td {
+    min-width: 120px;
+    width: calc(100%/7);
+    max-width: 150px;
+    text-align: center;
+    padding: 5px;
+    border: none;
+}
+
+.tabla-contenido td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.usuNoEx {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+}
+
+/* Parte inferior: tabla */
+.parte-inferior {
+    position: absolute;
+    top: 120px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 0px 0px 25px 25px;
+    min-height: 100px;
+}
+
+.parte-inferior::-webkit-scrollbar {
+    width: 0;
+}
+
+
+
+
+/* Atributos de las cards */
+.tarjetas-actividad {
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.dash {
+
+    font-size: 30px;
+}
+
+.card,
+.card img {
+    border-radius: 20px;
+    border: none;
+}
+
+.card-text {
+    font-weight: bolder;
+}
+
+
+.activity-cards {
+    width: 16rem;
+    height: 17rem;
+    transition: box-shadow 0.6s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    box-shadow: 4px 3px 5px 5px rgba(0, 0, 0, 0.3)
+}
+
+
+
+/* encuentra usuarios */
+
+.encontrar-usuarios {
+    background-color: whitesmoke;
+    height: 100vh;
+}
+
+.user-wrapper {
+    display: flex;
+    background-color: whitesmoke;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+    overflow-y: scroll;
+}
+
+.user-box {
+    display: flex;
+    position: relative;
+    margin: 10px auto;
+    height: 12rem;
+    width: 45rem;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    
+}
+
+.user-box a {
+    text-decoration: none;
+}
+
+
+.user-box:hover {
+
+    box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+.user-pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 10rem;
+    background-color: white;
+    margin: auto 20px;
+}
+
+.user-pic img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+
+.profile-data {
+    justify-content: center;
+    align-items: center;
+    margin: auto auto;
+    width: 20rem;
+    height: 10rem;
+    background-color: white;
+    padding-left: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-decoration: none;
+    color: black;
+}
+
+.busca-usuarios {
+    width: 80%;
+}

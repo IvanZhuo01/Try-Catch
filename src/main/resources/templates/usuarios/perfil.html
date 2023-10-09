@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link th:href="@{/css/Perfil.css}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <th:block th:replace="fragments/head :: header" />
+    <script th:src="@{/js/modalNotificacion.js}"></script>
+</head>
+
+<body>
+
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+    <main>
+        <section id="perfil" class="min-vh-100">
+            <div class="row fondo-perfil">
+
+                <!--  Parte superior -->
+                <div class="col-md-3 col-sm-3 sidebar-account">
+                    <div class="profile-wrapper p-3 ">
+                        <!-- Usuario: Nombre + foto -->
+                        <a th:if="${session.u} and ${session.u.id == user.id}" data-bs-toggle="modal"
+                            data-bs-target="#EditarPerfilModal" class="image-wrapper">
+                            <img th:src="@{/user/__${user.id}__/pic}" class="img-fluid" alt="foto de perfil"
+                                id="perfil-pic">
+                            <div class="capa"> </div>
+                            <div class="editar-pic">editar</div>
+                            <h2 th:if="${user.roles.contains('PROFESOR')}" class="d-flex">
+                                <button class="verificado" data-bs-toggle="tooltip" data-bs-placement="left"
+                                    title="Este usuario es Profesor">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                </button>
+                            </h2>
+                        </a>
+                        <div th:unless="${session.u} and ${session.u.id == user.id}" class="image-wrapper">
+                            <img th:src="@{/user/__${user.id}__/pic}" class="img-fluid" alt="foto de perfil"
+                                id="perfil-pic">
+                            <h2 th:if="${user.roles.contains('PROFESOR')}" class="d-flex">
+                                <button class="verificado" data-bs-toggle="tooltip" data-bs-placement="left"
+                                    title="Este usuario es Profesor">
+                                    <i class="bi bi-patch-check-fill"></i>
+                                </button>
+                            </h2>
+                        </div>
+                        <div style="text-align:center;">
+                            <h4 class="profile-name" th:text="${user.username}"></h4>
+                            <span>Nivel <i class="bi bi-stars amarillo"></i></span>
+                            <span th:text="${user.nivel}">0</span>
+                        </div>
+
+                    </div>
+
+                    <div class="options-nav">
+                        <th:block th:if="${session.u} and ${session.u.id == user.id}">
+                            <ul class="nav flex-column" id="notiInbox">
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#EditarPerfilModal"
+                                        th:onclick="cargaDatos()"> <i class="bi bi-pencil-square"></i> Editar perfil
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#cambiarPW"><i
+                                            class="bi bi-key"></i> Cambiar Contraseña
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a th:if="${!user. roles.contains ('PROFESOR')}" class="nav-link serProfe" data-bs-toggle="modal" data-bs-target="#notificacion"
+                                        th:onclick="notificacionSerprofe()"><i class="bi bi-person-check"></i>
+                                        Solicitar cuenta profesor
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:onclick="cargaActividad()"><i class="bi bi-keyboard"></i>
+                                        Actividad reciente
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <!-- Modal cambio de contraseña -->
+                            <div class="modal fade" id="cambiarPW" tabindex="-1" aria-labelledby="cambiarPWLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="cambiarPWLabel">Cambiar Contraseña</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <form method="POST" th:action="@{/user/cambiarPW}">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <label for="currentPassword">Contraseña Actual:</label>
+                                                    <input type="password" class="form-control" id="currentPassword"
+                                                        name="currentPassword" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="newPassword">Nueva Contraseña:</label>
+                                                    <input type="password" class="form-control" id="newPassword"
+                                                        name="newPassword" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="confirmPassword">Confirmar Nueva Contraseña:</label>
+                                                    <input type="password" class="form-control" id="confirmPassword"
+                                                        name="confirmPassword" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Cerrar</button>
+                                                <button type="submit" class="btn btn-primary">Cambiar
+                                                    contraseña</button>
+                                            </div>
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </th:block>
+                        <th:block th:if="${session.u} and ${session.u.id != user.id}">
+                            <ul class="nav flex-column" id="notiInbox">
+                                <li class="nav-item">
+                                    <a class="nav-link" th:onclick="cargaDatos()"> <i class="bi bi-person-circle"></i>
+                                        Datos del usuario
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:onclick="cargaActividad()"><i class="bi bi-keyboard"></i>
+                                        Actividad reciente
+                                    </a>
+                                </li>
+                            </ul>
+                        </th:block>
+                    </div>
+                </div>
+
+                <!-- Parte inferior -->
+                <div class="col-md-9 col-sm-9 user-data">
+
+                    <div class="tab-content p-2 p-md-5" id="v-pills-tabContent">
+                        <div class="mb-2 datos-perfil">
+                            <!-- Alertas al cambiar el perfil: error y exito -->
+                            <div th:if="${errorMessage}" class="alert alert-danger fade-in"
+                                style="text-align:center;padding-bottom: 5px;">
+                                <p th:text="${errorMessage}"></p>
+                            </div>
+
+                            <div th:if="${successMessage}" class="alert alert-success fade-in"
+                                style="text-align:center;padding-bottom: 5px;">
+                                <p th:text="${successMessage}"></p>
+                            </div>
+                            <h3 class="mb-4">Perfil de Usuario</h3>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Correo: </label>
+                                    <p th:text="${user.correo}" class="immutable-box"></p>
+
+                                </div>
+                                <div class="col-md-12">
+
+                                    <label>Universidad: </label>
+                                    <p th:if="${user.titulacion}" th:text="${user.titulacion.universidad.nombre}"
+                                        class="immutable-box">
+                                    </p>
+                                    <p th:unless=" ${user.titulacion}" class="immutable-box">no seleccionado</p>
+
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Titulacion:</label>
+                                        <p th:if="${user.titulacion}" th:text="${user.titulacion.grado}"
+                                            class="immutable-box">
+                                            Grado:</p>
+                                        <p th:unless="${user.titulacion}" class="immutable-box">no seleccionado </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Curso:</label>
+                                        <p th:if="${user.roles.contains('PROFESOR')}" class="immutable-box"
+                                            th:text="|Profesor de ${user.grado}º|"></p>
+                                        <p th:unless="${user.roles.contains('PROFESOR')}" th:text="|${user.grado}º|"
+                                            class="immutable-box"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div id="qa-wrapper" class="form-group actividad-reciente " style="display:none;">
+                            <div class="col-md-12 datos-actividad" >
+                                <div class="d-flex" style="justify-content: space-between;">
+                                    <h5 class="m-0">Últimas 10 preguntas</h5>
+                                    <p class="m-0" th:text="|${pregunta} en total |"></p>
+                                </div>
+                                <div class="row">
+                                    <div class="question-wrapper col-12">
+                                        <ol class="list-group reciente mt-2">
+                                            <li class="list-group-item d-flex justify-content-between align-items-start"
+                                                th:each="pregunta :${preguntas}">
+                                                <a th:href="@{/preguntas/__${pregunta.id}__}"
+                                                    class="list-group-item-action text-decoration-none">
+                                                    <div class="quest-title-perfil fw-bold"
+                                                        th:text="${pregunta.titulo}">
+                                                    </div>
+                                                    <div class="quest-body-perfil" th:text="${pregunta.cuerpo}">
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 datos-actividad">
+                                <div class="d-flex" style="justify-content: space-between;">
+                                    <h5 class="m-0">Últimas 10 respuestas</h5>
+                                    <p class="m-0" th:text="|${respuesta} en total |"></p>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="question-wrapper col-12">
+                                        <ol class="list-group reciente mt-2">
+                                            <li class="list-group-item d-flex justify-content-between align-items-start"
+                                                th:each="respuesta :${respuestas}">
+                                                <a th:href="@{/preguntas/__${respuesta.pregunta.id}__}"
+                                                    class="list-group-item-action text-decoration-none">
+                                                    <div class="quest-title-perfil fw-bold" th:text="${respuesta.cuerpo}">
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div th:if="${session.u}">
+                    <div th:replace="fragments/notificaciones/modalNotificacion.html :: modalPNotificacion">
+
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </section>
+        <!-- Modal de edicion de perfil -->
+        <div class="modal fade" id="EditarPerfilModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="POST" enctype="multipart/form-data" th:action="@{/user/editarPerfil}">
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <!-- Nombre de usuario -->
+                                    <div class="mb-3 col">
+                                        <span>Nombre de usuario:</span>
+                                        <input type="text" class="form-control" id="username" name="username"
+                                            th:value="${user.username}" maxlength="25" required>
+                                    </div>
+                                    <!-- Correo -->
+                                    <div class="mb-3 col">
+                                        <span class="text" id="basic-addon2">Correo:</span>
+                                        <input type="email" class="form-control" id="correo" name="correo"
+                                            th:value="${user.correo}" disabled>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <!-- Universidad -->
+                                    <div class="mb-3 col">
+                                        <span class="text" id="basic-addon2">Universidad:</span>
+                                        <select class="form-select" id="universidad" name="universidad"
+                                            onchange="changeUni(event)">
+                                            <option value="none" disabled selected>no seleccionado
+                                            </option>
+                                            <option th:each="univ : ${universidades}" th:value="${univ.id}"
+                                                th:text="${univ.nombre}"
+                                                th:selected="${user.titulacion == null ? false : univ.nombre == user.titulacion.universidad.nombre}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <!-- grado -->
+                                    <div class="mb-3 col">
+                                        <label for="curso">Grado:</label>
+                                        <select class="form-select" id="grado" name="grado"
+                                            th:disabled="${user.titulacion == null}">
+                                            <th:block th:if="${user.titulacion}">
+                                                <option th:each="tit : ${uniactual.titulaciones}" th:text="${tit.grado}"
+                                                    th:selected="${user.titulacion.grado == tit.grado}"
+                                                    th:value="${tit.id}"></option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+                                    <!-- curso -->
+                                    <div class="mb-3 col">
+                                        <label for="curso">Curso:</label>
+                                        <select class="form-select" id="curso" name="curso"
+                                            th:disabled="${user.titulacion == null}">
+                                            <option value="1" th:selected="${user.grado == 1}">1
+                                            </option>
+                                            <option value="2" th:selected="${user.grado == 2}">2
+                                            </option>
+                                            <option value="3" th:selected="${user.grado == 3}">3
+                                            </option>
+                                            <option value="4" th:selected="${user.grado == 4}">4
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Elegir foto de
+                                            perfil</label>
+                                        <input class="form-control" name="foto" type="file" id="formFile"
+                                            accept="image/jpeg,image/png">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script th:src="@{/js/perfil.js}"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,96 @@
+
+#universidades {
+    padding-top: 3em;
+    background-color: whitesmoke;
+    height: 100vh;
+}
+
+.search-box {
+    width: 85%;
+    justify-content: center;
+}
+
+.search-box input:focus,
+.search-box input:hover {
+    box-shadow: none;
+} 
+.boton-flotante {
+
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+
+    /* position: absolute; */
+    background-color: #f67f3b;
+    color: white;
+    padding: .25em 1em;
+
+    bottom: 1em;
+    right: 1em;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 100px;
+    max-width: 20em;
+    cursor: pointer;
+}
+
+.boton-flotante i {
+    font-size: 2.5em;
+}
+
+.boton-flotante span {
+    margin-left: 1em;
+}
+
+.search-btn{
+    right: 20px;
+}
+
+#unisContainer{
+    padding: 30px;
+}
+
+.university-card{
+    border: none;
+    width: 17rem;
+    height: 18rem;
+    transition: box-shadow 0.6s ease;
+    
+    border-radius: 20px;
+}
+
+.card:hover .card a:hover {
+    box-shadow: 4px 3px 5px 5px rgba(0, 0, 0, 0.3)
+}
+
+.card a{
+    text-decoration: none;
+    color: #383837;
+    cursor: pointer;
+    transition: color 0.6s ease;
+}
+
+.card a:hover{
+    color: steelblue;
+}
+
+.university-data {
+    color: rgb(31, 36, 41);
+}
+
+
+.card-title {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+    .title-wrapper .modal-title {
+
+        width: 300px;
+    }
+}
+
+
+

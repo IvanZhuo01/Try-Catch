@@ -1,0 +1,53 @@
+
+
+<div th:fragment="sidebarAdmin" id="sidebar">
+
+    <div class="logo-section">
+        <a href="/"><div class="logo"></div></a>
+        <span>Try & Catch</span>
+    </div>
+
+    <div class="administradores-section" id="administradores">
+        <div class="administradores-header">
+            <strong>Administradores</strong>
+            <div>
+                <span class="num-administradores" th:text="${admins.size()}">0</span>
+            </div>
+        </div>
+
+        <div class="administrador" th:each="admin: ${admins}">
+
+            <div class="profile-picture">
+                <img th:src="@{/user/__${admin.id}__/pic}" alt="">
+            </div>
+            <div class="info">
+                <span class="name" th:text="${admin.username}">Nombre</span>
+                <span class="cargo">Cargo de administrador</span>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div class="administrar-contenido-section">
+
+        <strong class="titulo">Administrar contenido</strong>
+
+        <a th:href="@{/admin/}" class="tipo-contenido" th:classappend="${#httpServletRequest.requestURI == '/admin/'} ? tipo-contenido--active : tipo-contenido">
+            <i class="bi bi-layout-text-window-reverse"></i>
+            <span>Vista principal</span>
+        </a>
+
+        <a th:href="@{/admin/universidades}" class="tipo-contenido" th:classappend="${#httpServletRequest.requestURI == '/admin/universidades'} ? tipo-contenido--active : tipo-contenido">
+            <i class="bi bi-house-door-fill"></i>
+            <span>Universidades</span>
+        </a>
+
+        <a  th:href="@{/admin/notificaciones}" class="tipo-contenido" th:classappend="${#httpServletRequest.requestURI == '/admin/notificaciones'} ? tipo-contenido--active : tipo-contenido">
+            <i class="bi bi-stack"></i>
+            <span>Notificaciones pendientes</span>
+        </a>
+        
+    </div>
+
+</div>

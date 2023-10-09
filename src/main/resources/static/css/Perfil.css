@@ -1,0 +1,270 @@
+#perfil .fondo-perfil {
+  width: 900px;
+  height: 650px;
+  background: white;
+  border-radius: 5px 100px;
+  box-shadow: 0.4rem 0.4rem 0.8rem rgba(0, 0, 0, 0.4);
+}
+
+main {
+  padding: 0 20px 0 20px;
+ 
+}
+
+body{
+  overflow: hidden;
+}
+
+#perfil {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px 0 20px;
+}
+
+
+.user-data {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.sidebar-account {
+  position: relative;
+  background-color: white;
+  height: 100%;
+  width: 200px;
+  border-radius: 0px 0px 0px 100px;
+  box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.3);
+}
+
+.image-wrapper {
+  position: relative;
+  padding: 10px 10px 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+  transition: display 0.1s ease;
+  overflow: hidden;
+}
+
+
+#perfil-pic {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+
+.editar-pic {
+  display: none;
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgb(50, 50, 50);
+  font-size: 1.2rem;
+  font-weight: bold;
+
+}
+
+.capa {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 1;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  /* color semitransparente */
+}
+
+.image-wrapper:hover .editar-pic {
+  display: block;
+}
+
+.image-wrapper:hover .capa {
+  display: block;
+}
+
+
+.verificado {
+  position: absolute;
+  bottom: 5%;
+  right: 15%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+.verificado i {
+  margin-top: 2px;
+  text-align: center;
+  font-size: 28px;
+  color: steelblue;
+}
+
+
+
+.options-nav {
+  position: relative;
+  top: 12%;
+  padding-left: 20px;
+  cursor: pointer;
+
+}
+
+
+.options-nav li:hover {
+  background-color: whitesmoke
+}
+
+
+.profile-wrapper {
+  position: relative;
+  top: 8%;
+}
+
+.profile-name {
+  word-wrap: break-word;
+  font-size: 1.1rem;
+  margin-bottom: 2px;
+}
+
+
+.user-data {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.immutable-box {
+  display: block;
+  border: 2px solid whitesmoke;
+  padding: 5px;
+  margin-top: 5px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 580px;
+}
+
+.datos-actividad {
+  border-radius: 20px;
+  width: 100%;
+  background: white;
+  padding: 20px;
+  height: 260px;
+  margin-bottom: 5px;
+
+}
+.actividad-reciente {
+  max-width: 600px;
+}
+
+.question-wrapper {
+  min-width: 600px;
+  max-width: 666px;
+  height: 200px;
+  overflow-y: auto;
+}
+
+.list-group-item {
+  border: none;
+  margin: 1px;
+  background-color: transparent;
+
+}
+
+.quest-title-perfil,
+.quest-body-perfil {
+  color: black;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.quest-body-perfil {
+  opacity: 80%;
+  font-size: 0.8rem;
+}
+
+.fade-in {
+  animation: fadeIn ease 1s;
+  -webkit-animation: fadeIn ease 1s;
+  -moz-animation: fadeIn ease 1s;
+  -o-animation: fadeIn ease 1s;
+  -ms-animation: fadeIn ease 1s;
+}
+
+
+.list-group-item {
+  border: none;
+  border-radius: 8px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@-ms-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+

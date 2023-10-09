@@ -1,0 +1,39 @@
+function fn() {
+    var env = karate.env; // get system property 'karate.env'
+    karate.log('karate.env system property was:', env);
+
+    if (!env) {
+        env = 'dev';
+    }
+
+    /**
+     * Variables here are available in all tests
+     */
+    var config = {
+        env: env,
+        myVarName: 'someValue',
+        baseUrl: 'http://localhost:8080'
+    }
+
+    /**
+     * Drivers for tests - currently configured value is good for Linux
+     */
+    karate.configure('driver', {
+        type: 'chrome',
+        // descomentar para chromium bajo linux
+        // executable: '/usr/bin/chromium-browser',
+        addOptions: ["--remote-allow-origins=*"],
+        executable: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+        // x86
+        // executable: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+        showDriverLog: true
+    })
+
+    if (env == 'dev') {
+        // customize
+        // e.g. config.foo = 'bar';
+    } else if (env == 'e2e') {
+        // customize
+    }
+    return config;
+}

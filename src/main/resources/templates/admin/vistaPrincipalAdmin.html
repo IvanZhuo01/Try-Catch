@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <link rel="stylesheet" th:href="@{/css/vistaPrincipalAdmin.css}">
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <script th:src="@{/js/modalNotificacion.js}"></script>
+</head>
+
+<body>
+
+    <div id="admin">
+        <div th:replace="fragments/sidebarAdmin.html :: sidebarAdmin"></div>
+        <div id="main">
+            <div th:replace="fragments/headerAdmin.html :: headerAdmin"></div>
+
+            <div id="admin-wrapper" class="p-4">
+                <h3>Usuarios</h3>
+                <div id="usuarios">
+                    
+                    <div class="parte-superior ">
+                        <div class="d-flex justify-content-end">
+                            <div>
+                                <a href="/admin/" type="button" id="notificacionSerProfe"
+                                    class="btn btn-outline-danger rounded-pill m-3">Limpiar <i class="bi bi-x-octagon-fill"></i></a>
+                            </div>
+                            <div class="buscador mt-1 me-3">
+                                <div th:replace="fragments/searchBar.html :: searchBar(pholder=${newPlaceHolder})">
+                                </div>
+                            </div>
+                        </div>
+                        <table class="tabla-encabezado">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Nombre</th>
+                                    <th>Correo</th>
+                                    <th>Profesor</th>
+                                    <th>Activo</th>
+                                    <th>Administrador</th>
+                                    <th>Notificar</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="parte-inferior">
+                        <div th:if="${userr.size() gt 0}">
+                            <table class="tabla-contenido">
+                                <tbody>
+                                    <div th:each=" usu: ${userr}">
+                                        <tr>
+                                            <!-- Foto de perfil -->
+                                            <td>
+                                                <div>
+                                                    <a th:href="@{/perfil/__${usu.id}__}"><img th:src="@{/user/__${usu.id}__/pic}" width="45" height="45"
+                                                        class="rounded-circle me-2" alt="user image"></a>
+                                                </div>
+                                            </td>
+                                            <!-- Nombre -->
+                                            <td th:text="${usu.username}">hola</td>
+                                            <!-- Correo -->
+                                            <td th:text="${usu.correo}">hola</td>
+                                            <!-- Profesor -->
+                                            <td>
+                                                <div th:if=" ${session.u} and ${ session.u.username != usu.username}">
+                                                    <div th:if="${#lists.contains(usu.roles, 'PROFESOR')}"
+                                                        class="form-check form-switch d-flex justify-content-center ">
+                                                        <input class="form-check-input" type="checkbox" role="switch"
+                                                            th:id="'profeNoCheck'+${usu.id}"
+                                                            th:onclick="'changeProfesor('+${usu.id}+')'" checked>
+                                                    </div>
+                                                    <div th:unless="${#lists.contains(usu.roles, 'PROFESOR')}"
+                                                        class="form-check form-switch d-flex justify-content-center ">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            th:id="'profeNoCheck'+${usu.id}" role="switch"
+                                                            th:onclick="'changeProfesor('+${usu.id}+')'">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    th:unless=" ${session.u} and ${ session.u.username != usu.username}">
+                                                    <div class=" text-center align-top">
+                                                        <i class="bi bi-dash-lg dash"></i>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                            <!-- Activo -->
+                                            <td>
+                                                <div th:if=" ${session.u} and ${ session.u.username != usu.username}">
+                                                    <div th:if="${usu.enabled == true}"
+                                                        class="form-check form-switch d-flex justify-content-center">
+                                                        <input class="form-check-input" type="checkbox" role="switch"
+                                                            th:id="'activo'+${usu.id}" checked
+                                                            th:onclick="'changeActivo('+${usu.id}+')'">
+                                                    </div>
+
+                                                    <div th:unless="${usu.enabled == true}"
+                                                        class="form-check form-switch d-flex justify-content-center">
+                                                        <input class="form-check-input" type="checkbox" role="switch"
+                                                            th:id="'activo'+${usu.id}"
+                                                            th:onclick="'changeActivo('+${usu.id}+')'">
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    th:unless=" ${session.u} and ${ session.u.username != usu.username}">
+                                                    <div class=" text-center align-top">
+                                                        <i class="bi bi-dash-lg dash"></i>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                            <!-- Administrador -->
+                                            <td>
+                                                <div th:if=" ${session.u} and ${ session.u.username != usu.username}">
+                                                    <div th:if="${#lists.contains(usu.roles, 'ADMIN')}"
+                                                        class="form-check form-switch d-flex justify-content-center ">
+                                                        <input class="form-check-input" type="checkbox" role="switch"
+                                                            th:id="'admin'+${usu.id}"
+                                                            th:onclick="'notificacionSerAdmin('+${usu.id}+')'" checked>
+                                                    </div>
+                                                    <div th:unless="${#lists.contains(usu.roles, 'ADMIN')}"
+                                                        class="form-check form-switch d-flex justify-content-center ">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            th:id="'admin'+${usu.id}" role="switch"
+                                                            th:onclick="'notificacionSerAdmin('+${usu.id}+')'">
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    th:unless=" ${session.u} and ${ session.u.username != usu.username}">
+                                                    <div class=" text-center align-top">
+                                                        <i class="bi bi-dash-lg dash"></i>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                            <!-- Notificar usuario -->
+                                            <td>
+                                                <div th:if=" ${session.u} and ${ session.u.username != usu.username}">
+                                                    <i class="bi bi-chat-fill morado" data-bs-toggle="modal"
+                                                        data-bs-target="#notificacion"
+                                                        th:onclick="'notificacionReporteAdinAUsu('+${usu.id}+')'"></i>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    </div>
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div th:unless="${userr.size() gt 0}">
+                            <div class="usuNoEx">
+                                <h3 class="text-center fw-bolder">USUARIO INEXISTENTE</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+
+
+                <div id="actividad">
+                    <h3>Actividad</h3>
+                    <div class="tarjetas-actividad d-flex gap-3 justify-content-between">
+                        <div class="card activity-cards">
+                            <img th:src="@{/img/admin/adminUsuarios.jpg}" class="card-img-top h-50" alt="Usuarios">
+                            <div class="card-body text-center   ">
+                                <p class="card-text" th:text="${userr.size()}"></p>
+                                <p class="card-text">Usuarios</p>
+                            </div>
+                        </div>
+
+                        <div class="card activity-cards" style="width: 16rem; height: 18rem;">
+                            <img img th:src="@{/img/admin/documentosAdmin.jpg}" class="card-img-top h-50" alt="Ficheros">
+                            <div class="card-body text-center">
+                                <p class="card-text" th:text="${ficheros}"></p>
+                                <p class="card-text">Preguntas con Documentos</p>
+                            </div>
+                        </div>
+                        <div class="card activity-cards" style="width: 16rem; height: 17rem;">
+                            <img img th:src="@{/img/admin/preguntasAdmin.jpg}" class="card-img-top h-50"
+                                alt="Preguntas y respuestas.">
+                            <div class="card-body text-center">
+                                <p class="card-text" th:text="${preguntas}">0</p>
+                                <p class="card-text">Preguntas y respuestas</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<div th:if="${session.u}">
+    <div th:replace="fragments/notificaciones/modalNotificacion.html :: modalPNotificacion">
+
+    </div>
+</div>
+
+</html>

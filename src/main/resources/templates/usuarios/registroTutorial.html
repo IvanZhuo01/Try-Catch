@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <link rel="stylesheet" th:href="@{/css/tutorial.css}" href="css/tuturial.css" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">     
+
+</head>
+
+<body>
+    <header th:replace="fragments/tutorialFragment.html :: tutorial">
+    </header>
+
+    <section class="wrapper row">
+        <div class="text-container">
+            <div class="tutorial-1">
+                <p class="tutorial-subtitle">Empecemos configurando tu perfil</p>
+                <p class="tutorial-title">¿Cuál es tu universidad?</p>
+            </div>
+            <div class="tutorial-2" style="display: none;">
+                <p class="tutorial-title">¿Qué titulación estás estudiando?</p>
+            </div>
+            <div class="tutorial-3" style="display: none;">
+                <p class="tutorial-title">¿En qué curso te encuentras?</p>
+            </div>
+        </div>
+        <div class="tutorial-container">
+            <div class="tutorial tutorial-1" id="choose-university">
+
+                <div class="row">
+                    <div class="search-box">
+                        <form>
+                            <input name="query" type="search" placeholder="Busca una universidad..." oninput="searchUniversidades(event, tutorialUni)">
+                            <button class="search-btn "><i class="bi bi-search " style="color:black;" ></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="university-container">
+                    <p class="tutorial-subtitle">Universidades destacadas</p>
+                    <div class="row" id="unisTutorial">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-3" th:each="universidad: ${universidades}">
+                            <div class="card unis-card" th:id="${universidad.id}">
+                                <img th:src="@{/user/universidad/__${universidad.id}__/pic}" class="card-img-top p-2" alt="imagen universidad">
+                            </div>
+                        </div>
+                            
+                        <a id="university" class="abrir-modal" href="#solicitud-modal"> No encuentro mi universidad </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="tutorial tutorial-2" id="choose-career" style="display:none;">
+                <select class="form-select" id="grado" name="grado"></select>
+
+                <p class="search-box warning">¿No encuentras tu carrera? <span> <a id="career" class="abrir-modal"
+                            href="#solicitud-modal"> ¡Notificanos! </a> </span>
+                </p>
+            </div>
+
+            <div class="tutorial tutorial-3" id="choose-level" style="display:none;">
+                <div class="card preview-degree-card my-3">
+                    <div class="card-body d-flex flex-row align-items-center justify-content-between "id="imagenuniversidad">
+                        <div>
+                            <h3 class="card-title"> Ingeniería informática </h3>
+                        </div>
+                    </div>
+                </div>
+                <select id="select-curso" class="form-select" aria-label="Seleccione un curso">
+                    <option value="1">1º curso</option>
+                    <option value="2">2º curso</option>
+                    <option value="3">3º curso</option>
+                    <option value="4">4º curso</option>
+                    <option value="5">5º curso</option>
+                </select>
+            </div>
+            <div class="btn-container">
+                <div class="common-btns tutorial-1-btns">
+                    <button id="siguienteBtn1" type="button" class="sig-btn"> Siguiente <span> <i class="bi bi-arrow-right"></i> </span>
+                    </button>                    
+                </div>
+            </div>
+        </div>
+        <div class="btn-container">
+            <div class="common-btns tutorial-2-btns" style="display:none;">
+                <button type="button" class="prev-btn"> <span> <i class="bi bi-arrow-left"></i> </span> Anterior
+                </button>
+                <button type="button" class="sig-btn"> Siguiente <span> <i class="bi bi-arrow-right"></i> </span>
+                </button>
+            </div>
+            <div class="common-btns tutorial-3-btns" style="display:none;">
+                <button type="button" class="prev-btn"> <span> <i class="bi bi-arrow-left"></i> </span> Anterior </button>
+                <button type="button" class="sig-btn"> Siguiente <span> <i class="bi bi-arrow-right"></i> </span>
+                </button>
+            </div>
+            <div class="common-btns tutorial-4-btns" style="display:none;">
+                <button type="button" class="prev-btn"> <span> <i class="bi bi-arrow-left"></i> </span>Anterior
+                </button>
+                <button type="button" class="sig-btn"> Terminar <span> <i class="bi bi-check2"></i> </span>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+
+    <div class="notif-wrapper" style="display:none;">
+        <a th:href="${path}">
+            <div class="sombreado"></div>
+        </a>
+        <div class="msg">
+            <p><i class="bi bi-check-circle-fill"></i> ¡Genial! Tu perfil se ha configurado correctamente.</p>
+        </div>
+    </div>
+
+    <div th:replace="fragments/tutorialFragment.html :: modal-wrapper"></div>
+    <script th:src="@{/js/tutorial.js}"></script>
+    <script th:src="@{/js/iwclient.js}"></script>
+</body>
+
+</html>

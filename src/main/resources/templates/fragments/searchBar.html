@@ -1,0 +1,8 @@
+<div th:fragment="searchBar(pholder)">
+    <div class="search-box">
+        <form th:action="@{${path}}">
+            <input autocomplete="off" id="queryb" name="query" type="search" th:placeholder="${pholder}">
+            <button class="search-btn"><i class="bi bi-search" style="color:black"></i></button>
+        </form>
+    </div>
+</div>

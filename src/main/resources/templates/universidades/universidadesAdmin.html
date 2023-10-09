@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" th:href="@{/css/universidades.css}" href="css/universidades.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/admin.css}" href="css/admin.css" type="text/css" />
+</head>
+
+<body>
+    <div id="admin">
+        <div th:replace="fragments/sidebarAdmin.html :: sidebarAdmin"></div>
+        <div id="main">
+            <div th:replace="fragments/headerAdmin.html :: headerAdmin"></div>
+            <div th:replace="fragments/universidades/universidades.html :: universidades"></div>
+        </div>
+    </div>
+    <div class="boton-flotante" data-bs-toggle="modal" data-bs-target="#crearTitulacion">
+        <i class="bi bi-plus-circle-fill"></i>
+        <span>Crear nueva Universidad</span>
+    </div>
+
+    <div class="modal fade" tabindex="-1" id="crearTitulacion">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content backgroundModal">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear Universidad</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form method="post" enctype="multipart/form-data" th:action="@{/admin/universidades}">
+
+                        <div class="p-4">
+
+                            <div class="d-flex align-items-center">
+                                <div class="w-100 input-group flex-nowrap">
+                                    <input class="form-control" name="nombre" id="nombre"
+                                        placeholder="Introduzca una universidad" required>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mt-4">
+                                <div class="w-100 input-group flex-nowrap">
+                                    <input class="form-control" name="localizacion" id="localizacion"
+                                        placeholder="Introduzca una localizacion" required>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mt-4">
+                                <div class="w-100 input-group flex-nowrap">
+                                    <label for="foto" class="form-label mt-1">Elegir foto</label>
+                                    <input class="form-control" name="foto" type="file" id="foto"
+                                        accept="image/jpeg,image/png">
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mt-4">
+                                <div class="w-100 input-group flex-nowrap">
+                                    <textarea class="form-control" name="descripcion" id="descripcion" cols="78" rows="6"
+                                        placeholder="Descripcion..."></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-3 ">
+                            <button id="continuarButton" type="submit" class="btn btn-secondary botonContinuar">
+                                Continuar <i class="bi bi-arrow-return-left"></i> </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

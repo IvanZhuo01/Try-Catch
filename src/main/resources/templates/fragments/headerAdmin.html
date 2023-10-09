@@ -1,0 +1,46 @@
+<div th:fragment="headerAdmin" class="header">
+    <span>Bienvenido, <span th:text="${session.u.username}">Nombre</span></span>
+    
+    <div class="derecha">
+        <span class="boton-inicio align-self-center justify-content-center me-4"><a class="vistaPrincipal" href="/"><i class="bi bi-house-fill"></i></a></span>
+        <div th:if="${session.u}" th:replace="fragments/notificaciones/visualizarNotificacion.html :: modalVisualizarNoti"></div>
+        <div class="nav-item align-self-center me-4">
+            <div class="dropdown">
+                <button type="button" class="btn btn-outline-primary btn-sm position-relative" data-bs-toggle="dropdown" aria-expanded="false">
+                    📨 <span id="nav-unread" 
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">0
+                        <span class="visually-hidden">unread messages</span></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" style="min-width: 400px;" id="notiInbox">
+                    <div class="ps-3">
+                        <h5 class="m-1"><i class="bi bi-bell"></i> Notificaciones</h5>
+                    </div>
+                    <li><hr class="dropdown-divider"></li>
+                    <div class="d-flex align-items-center justify-content-center mt-3" id="emptyInbox">
+                        <p>No tienes ninguna notificacion...</p>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="profile-picture">
+            <a th:href="@{/perfil/__${session.u.id}__}">
+                <img th:src="@{/user/__${session.u.id}__/pic}" alt="user" width="45" height="45"
+                class="rounded-circle">
+            </a>
+            
+        </div>
+
+    </div>
+
+
+    <div th:if="${session.u}" th:replace="fragments/notificaciones/notificacionToast.html :: notificationToast"></div>
+
+
+    <!-- Websockets -->
+    <script th:src="@{/js/stomp.js}" src="js/stomp.js"></script>
+    <script th:src="@{/js/iw.js}" src="js/iw.js"></script>
+
+    <!-- Otros scripts de interacción, aquí -->
+    <script th:src="@{/js/vistaPrincipalAdmin.js}"></script>
+</div>

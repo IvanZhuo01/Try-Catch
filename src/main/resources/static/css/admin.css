@@ -1,0 +1,197 @@
+
+#admin{
+    background-color: blue;
+    display: flex;
+    /* height: 100vh; */
+}
+
+body{
+    background-color: #f3f3f3;
+}
+
+#sidebar{
+    background-color: white;
+    padding: 0;
+    width: 300px;
+    position: fixed;
+    height: 100%;
+    z-index: 10;
+}
+
+#sidebar .logo-section{
+    background-color: #f3f3f3;
+    padding: 1em;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sidebar .logo-section .logo{
+    height: 100px;
+    width: 100px;
+    background-color: white;
+    border-radius: 100%;
+
+    background-image: url('/img/logo_rec.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#sidebar .logo-section span{
+    font-weight: bold;
+    margin-top: .5em;
+}
+
+#sidebar .administradores-section{
+    background-color: white;
+    padding: 1em;
+    border-bottom: 2px solid grey;
+}
+
+#sidebar .administradores-section .administradores-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5em;
+}
+
+#sidebar .administradores-section .administradores-header div{
+    display: flex;
+    align-items: center;
+    gap: .5em;
+}
+
+
+#sidebar .administradores-section .administradores-header .num-administradores{
+    background-color: #9FD3C7;
+    padding: 0 .5em;
+    border-radius: 100%;
+    font-size: .75em;
+}
+
+#sidebar .administradores-section .administrador{
+    display: flex;
+    margin-bottom: 1em;
+    cursor: pointer;
+}
+
+
+#sidebar .administradores-section .administrador .profile-picture{
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    background-color: #d4d4d4;
+
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#sidebar .administradores-section .administrador .profile-picture img{
+    height: 100%;
+}
+
+
+#sidebar .administradores-section .administrador .info{
+    padding-left: 1em;
+}
+
+#sidebar .administradores-section .administrador .name{
+    font-weight: bold;
+    font-size: .8em;
+    display: block;
+}
+
+#sidebar .administradores-section .administrador .cargo{
+    font-size: .7em;
+    display: block;
+}
+
+#sidebar .administrar-contenido-section{
+    background-color: white;
+    padding: 1em;
+}
+
+#sidebar .administrar-contenido-section .titulo{
+    margin-bottom: 1em;
+    display: block;
+}
+
+#sidebar .administrar-contenido-section .tipo-contenido{
+    display: block;
+    text-decoration: none;
+    color: #4d4d4d;
+    padding-left: 1em;
+    margin-bottom: .25em;
+    cursor: pointer;
+}
+
+#sidebar .administrar-contenido-section .tipo-contenido:hover{
+    background-color: #f3f3f3;
+}
+
+#sidebar .administrar-contenido-section .tipo-contenido i{
+    font-size: 1.5em;
+    margin-right: .3em;
+}
+
+#sidebar .administrar-contenido-section .tipo-contenido--active{
+    color: #f67f3b;
+}
+
+
+
+#main{
+    background-color: #f3f3f3;
+    flex-grow: 1;
+    padding-left: 300px;
+}
+
+#main .header{
+    background-color: white;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-left: 2px solid grey;
+    
+}
+
+#main .header > span{
+    font-size: 1.25em;
+}
+
+#main .header .derecha{
+    display: flex;
+    
+}
+
+#main .header .profile-picture{
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    background-color: #d4d4d4;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main .header .profile-picture img{
+    height: 100%;
+}
+
+.boton-inicio a{
+    color: lightslategray ;
+    font-size: 25px;
+    text-decoration: none;
+    cursor: pointer;
+
+}
+.boton-inicio a:hover {
+    color: cornflowerblue;
+}
+

@@ -1,0 +1,137 @@
+.container .row{
+    width: 900px;
+    height: 650px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0.4rem 0.4rem 0.8rem rgba(0,0,0, 0.4);
+
+} 
+
+section {
+    padding: 0 20px 0 20px;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tandc{
+    position: relative;
+    background-image: url("/img/people.jpg");
+    background-position: center;
+    background-size: cover;
+    border-radius: 8px;
+    
+}
+
+
+.tandc img{
+    width: 45px; 
+    position: absolute;
+    top: 30px;
+    left: 30px;
+
+}
+
+.text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.text p {
+    font-weight: 800;
+    font-size: 20px;
+    color: black;
+    text-shadow: 2px 2px 4px whitesmoke;
+}
+
+.i{
+    font-weight: 400;
+    font-size: 15px;
+}
+
+
+.right{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.input-box{
+    width: 300px;
+    box-sizing: border-box;
+}
+
+.input-box h1{
+    text-align: left;
+    margin-bottom: 45px;
+    color: #15133C;
+}
+
+.input-field{
+    height: 0px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px 0 10px;
+    transition: height 0.8s ease-out;
+    overflow: hidden;
+}
+
+.member{
+    height: 65px;
+}
+
+.input{
+    height: 45px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgb(225, 225, 225);
+    margin: 0 0 20px 0;
+    color: #15133C;
+    
+}
+
+.submit {
+    margin-top: 10px;
+    border: none;
+    height: 40px;
+    color:#15133C;
+    background: #ececec;
+    border-radius: 10px;
+    transition: background 0.5s;
+}
+
+.submit:hover{
+    background: rgba(37, 95, 157, 0.9);
+    color: white;
+}
+
+
+.sign{
+    text-align: center;
+    font-size: small;
+    margin: 25px 0px 0px 10px;
+    float: left;
+}
+
+#sign a:hover{
+    cursor: pointer;
+    color: cornflowerblue;
+}
+
+
+a:hover {
+    text-decoration: underline;
+    font-weight: 700;
+    color:cadetblue;
+}

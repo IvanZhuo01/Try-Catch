@@ -1,0 +1,42 @@
+
+
+<div th:fragment="universidad" id="universidades">
+    <div class="container">
+        <div class="offset-2 col-8 border shadow bg-body border-secondary border-opacity-50 rounded p-4">
+            <div class="row">
+                <div class="col col-3">
+                    <img th:src="@{/user/universidad/__${universidad.id}__/pic}" class="card-img-top p-1" alt="...">
+                </div>
+                <div class="col col-8">
+                    <h4 th:text="${universidad.nombre}"></h4>
+                    <div class="d-flex">
+                        <p><i class="bi bi-geo-alt-fill"></i><p class="card-text m-0 text-primary" th:text="${universidad.localizacion}">localizacion</p></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-2">
+                <div class="border p-3 rounded shadow-sm w-100">
+                    <p th:text="${universidad.descripcion}" class="m-1">
+                        descripcion
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="row p-2">
+                <h5>Titulaciones: </h5>
+                <div class="col-md-4 mb-3" th:each="titu: ${universidad.titulaciones}">
+                    <div class="card" style="width: 14rem;">
+                        <div class="card-body">
+                          <p class="card-text" th:text="${titu.grado}">Grado en ingeniería de software.</p>
+                        </div>
+                    </div>
+                </div>
+                <div th:if="${session.u} and ${session.u.hasRole('ADMIN')}" class="col-md-4 mb-3">
+                    <div class="card p-4 align-items-center" style="width: 16rem;" data-bs-toggle="modal" data-bs-target="#crearTitulacion">
+                        <span class="text-primary"><i class="bi bi-plus-circle-fill"></i> Crear nueva titulacion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

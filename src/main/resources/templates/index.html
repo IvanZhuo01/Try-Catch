@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+</head>
+
+<body class="d-flex flex-column h-100">
+    <header th:replace="fragments/nav.html :: nav"></header>
+
+    <section class="hero">
+        <div class="row">
+            <div
+                class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 text-center justify-content-center align-content-center">
+                <div class="hero-principal">
+                    <h1> <span class="T">Try </span>&<span class="C"> Catch</span> </h1>
+                    <p> Aprende. Comparte. Supera </p>
+                    <input th:replace="fragments/searchBar.html :: searchBar(pholder=${buscador})" />
+                </div>
+            </div>
+            <div class="menu-btn">
+                <p> O ELIGE ENTRE </p>
+                <a href="/encuentraUsuarios" class="btn">Encuentra usuarios</a>
+                <a href="/universidades" class="btn">Universidades y grados</a>
+                <a href="/actividad" class="btn" id="ultPreg">Actividad reciente</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seccion 2 -->
+    <section class="bg-white">
+
+        <h2 class="title">Conoce T&C</h2>
+        <div class="acordeon">
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            ¿Cómo funciona Try&Catch?
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">T&C es una plataforma donde los estudiantes
+                            universitarios pueden formular preguntas y obtener respuestas de otros usuarios, lo que les
+                            permite ampliar su conocimiento y resolver dudas académicas.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            ¿Cómo puedo encontrar y descargar documentos?
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Para poder encontrar y descargar documentos puedes realizar
+                            busquedas desde la pantalla principal o en la pestaña de actividad reciente, sobre "tags" o
+                            temas de tu preferencia
+                            para encontrar preguntas, documentos (dudas sobre examenes, apuntes, temas concretos... ).
+                            En definitiva, resultados relacionadas con el asunto de la búsqueda.</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseThree" aria-expanded="false"
+                            aria-controls="flush-collapseThree">
+                            ¿Cómo puedo escribir una pregunta?
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse"
+                        aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Para escribir una pregunta tan solo necesitas pulsar el boton de
+                            <code>"Sube nuevos archivos o haz una nueva pregunta"</code> que podras encontrar en las pantallas de <strong>búsqueda</strong>, <strong>actividad reciente</strong> o en la <strong>pantalla principal</strong>.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="universidades" class="university-section">
+        <h3 class="subtitle">Alojamos contenido de las mejores universidades</h3>
+        <div class="slide-container">
+            <div class="slider">
+                <div class="slide">
+                    <img src="/img/universidades/ucm.jpg" alt="universidad">
+                </div>
+                <div class="slide">
+                    <img src="/img/universidades/urjc.png" alt="universidad">
+                </div>
+                <div class="slide">
+                    <img src="/img/universidades/ulpgc.jpg" alt="universidad">
+                </div>
+                <div class="slide">
+                    <img src="/img/universidades/upm.png" alt="universidad">
+                </div>
+                <div class="slide">
+                    <img src="/img/universidades/upv.jpg" alt="universidad">
+                </div>
+                <!-- <div class="slide">
+                    <img src="/img/universidades/UAM.png" alt="universidad">
+                </div>
+                <div class="slide">
+                    <img src="/img/universidades/UGR.png" alt="universidad">
+                </div> -->
+                <div class="slide">
+                    <img src="/img/universidades/ucm.jpg" alt="universidad">
+                </div>
+                <div class="slide">
+                    <img src="/img/universidades/urjc.png" alt="universidad">
+                </div>
+                <div class="slide">
+                    <img src="/img/universidades/ulpgc.jpg" alt="universidad">
+                </div>
+                <div class="slide">
+                    <img src="/img/universidades/upm.png" alt="universidad">
+                </div>
+                <div class="slide">
+                    <img src="/img/universidades/upv.jpg" alt="universidad">
+                </div>
+                <!-- <div class="slide">
+                    <img src="/img/universidades/UAM.png" alt="universidad">
+                </div>
+                <div class="slide">
+                    <img src="/img/universidades/UGR.png" alt="universidad">
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <!-- seccion 3 -->
+    <section id="testimonios" class="testimonios">
+        <h2 class="testim-title">Reseñas</h2>
+        <h3 class="testim-subtitle">Estas son algunos de los reseñas de la comunidad T&C</h3>
+        <!-- Carousel -->
+        <div id="testimonios-carousel" class="carousel carousel-dark slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <img class="testimonio-img rounded-circle" src="/img/people/david.jpg" alt="user 1">
+                        <p class="testimonio-texto"> La web es muy
+                            fácil de usar y la comunidad es muy amable y útil. Me ha ayudado a resolver y encontrar
+                            información valiosa sobre las universidades
+                            y las carreras que ofrecen. Recomiendo esta web a cualquier estudiante universitario que
+                            busque ayuda con sus estudios.</p>
+                        <div class="testimonio-info">
+                            <p class="user">David</p>
+                            <p class="estudios">Estudiante de arquitectura</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <img class="testimonio-img rounded-circle" src="/img/people/sara.jpg" alt="user 2">
+                        <p class="testimonio-texto">Esta web ha sido mi salvación en momentos de estrés universitario.
+                            puedes obtener respuestas rápidas y precisas de la
+                            comunidad. Además, la posibilidad de subir documentos y texto ha sido muy útil para
+                            compartir información e ideas con otros estudiantes.</p>
+                        <div class="testimonio-info">
+                            <p class="user">Sara</p>
+                            <p class="estudios">Estudiante de ingeneria de software</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <img class="testimonio-img rounded-circle" src="/img/people/jose.jpg" alt="user 3">
+                        <p class="testimonio-texto"> Me encanta poder hacer preguntas sobre cualquier tema de la
+                            universidad y obtener respuestas útiles y
+                            rápidas de la comunidad. Esta web es una herramienta imprescindible para cualquier
+                            estudiante
+                            universitario que busque ayuda con sus estudios .
+                        <div class="testimonio-info">
+                            <p class="user">jose</p>
+                            <p class="estudiantes">Estudiante de medicina</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonios-carousel"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonios-carousel"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <th:block th:if="${session.u}">
+            <div class="boton-flotante" data-bs-toggle="modal" data-bs-target="#crearPregunta">
+                <i class="bi bi-plus-circle-fill"></i>
+                <span>Sube nuevos archivos o haz una nueva pregunta</span>
+            </div>
+            <div th:replace="fragments/preguntas/crearPregunta.html :: div"></div>
+        </th:block>
+    </section>
+
+    <th:block th:replace="fragments/footer.html :: footer" />
+</body>
+
+</html>

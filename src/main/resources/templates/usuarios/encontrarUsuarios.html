@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <link rel="stylesheet" th:href="@{/css/custom.css}">
+    <link rel="stylesheet" th:href="@{/css/vistaPrincipalAdmin.css}">
+</head>
+
+<body>
+    <div class="encontrar-usuarios ">
+        <header th:replace="fragments/nav.html :: nav"></header>
+
+        <div class="m-5 d-flex">
+            <div>
+                <a href="/encuentraUsuarios" type="button" id="notificacionSerProfe"
+                    class="btn btn-outline-danger rounded-pill m-3">Limpiar <i class="bi bi-x-octagon-fill"></i></a>
+            </div>
+            <div class="busca-usuarios">
+                <div th:replace="fragments/searchBar.html :: searchBar(pholder=${newPlaceHolder})"></div>
+            </div>
+        </div>
+
+        <div class="m-5">
+            <h3>Usuarios</h3>
+            <hr>
+            <div th:if="${userr.size() gt 0}">
+                <div class="user-wrapper row">
+
+                    <div class="user-box col-12 col-xl-12 col-md-12 col-sm-12" th:each=" usu,iter : ${userr}">
+                        <a th:href="@{/perfil/__${usu.id}__}">
+                            <div class="row">
+                                <div class="user-pic col-4">
+                                    <img th:src="@{/user/__${usu.id}__/pic}" alt="user image">
+                                </div>
+                                <div class="profile-data col-8">
+                                    <div class="row">
+                                        <h3 class="col-12 mt-3" th:text="${usu.username}">Username</h3>
+                                        <p class="col-12 mt-1" th:if="${usu.roles.contains('PROFESOR')}">Profesor</p>
+                                        <p class="col-12 mt-1" th:unless="${usu.roles.contains('PROFESOR')}">Usuario</p>
+                                        <p class="col-12 mt-1">
+                                            <span>Nivel <i class="bi bi-stars amarillo"></i> </span>
+                                            <span th:text="${usu.nivel}">0</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

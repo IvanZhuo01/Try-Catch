@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <th:block th:replace="fragments/head :: header" />
+    <link rel="stylesheet" th:href="@{/css/log.css}" href="css/log.css" type="text/css" />
+</head>
+
+<body>
+    <section>
+        <div class="container min-vh-100">
+            <div class="row">
+                <div class="col-md-6 tandc">
+                    <!-- logo -->
+                    <a href="/"><img src="/img/logo_rec.png" alt="tandc_logo">
+                    </a>
+                    <div class="text d-none d-md-block">
+                        <p class="fw-bold"> Juntos hacia el conocimiento, compartamos lo que sabemos...</p> <i> { Try &
+                            Catch }</i>
+                    </div>
+                </div>
+                <div class="col-md-6 right">
+                    <div class="input-box">
+                        <div class="alert alert-danger text-center d-none" role="alert" id="errorBox">
+                            Correo o contraseña incorrectos
+                        </div>
+                        <div th:if="${success}" class="alert alert-success text-center" role="alert">
+                            Cuenta creada con exito 
+                        </div>
+                        <h1 id="input-title">Inicio de sesión</h1>
+                        <div class="alert alert-danger" role="alert" th:if="${error != null}" th:text="${error}">
+                            A simple danger alert—check it out!
+                        </div>
+                        <form id="form" method="post" th:action="@{/login}">
+                            <div id="name-field" class="input-field not-member">
+                                <input type="text" class="input" id="name" name="name" requiered autocomplete="off"
+                                    placeholder="Nombre de usuario" maxLength="25">
+                            </div>
+
+                            <div class="input-field member">
+                                <input type="email" class="input" id="username" name="username" requiered
+                                    autocomplete="off" placeholder="Dirección de email" maxLength="25">
+                            </div>
+
+                            <div class="input-field member">
+                                <input type="password" class="input" id="password" name="password" requiered
+                                    autocomplete="off" placeholder="Contraseña">
+                            </div>
+
+                            <div id="confirm-password" class="input-field not-member">
+                                <input type="password" class="input" id="confirmacion" name="confirmacion" requiered
+                                    autocomplete="off" placeholder="Confirme la contraseña">
+
+                            </div>
+
+                            <div class="input-field member">
+                                <input id="buttonSubmit" type="submit" class="submit" value="Continuar">
+                            </div>
+                        </form>
+                        <div class="sign">
+                            <span id='sign'> ¿Eres un nuevo usuario? <a> Crea una cuenta </a> </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="/js/log.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,131 @@
+<div th:fragment="modalPregunta" class="modal fade" tabindex="-1" id="crearPregunta">
+    <script th:src="@{/js/crearpregunta.js}"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content backgroundModal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCrearTitle">Crear pregunta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert" th:if="${errors != null}" id="crearPreguntaError">
+                    A simple danger alert—check it out!
+                </div>
+                <form class="needs-validation" method="post" th:action="@{/preguntas/}" enctype="multipart/form-data"
+                    id="crearform" novalidate>
+
+                    <div class="p-4">
+                        <div class="d-flex align-items-center">
+                            <div class="d-flex me-3">
+                            </div>
+                            <div class="w-100 input-group flex-nowrap">
+                                <input class="form-control" type="text" name="titulo" id="titulo"
+                                    placeholder="Introduzca un título" size="50" maxLength="50" required>
+                                <span class="input-group-text justify-content-center " id="contador-titulo"
+                                    style="min-width: 60px; max-width: 60px;">50/50</span>
+                                <div class="invalid-feedback">
+                                    El titulo es un campo obligatorio.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <button class="btn btn-sm btn-primary mt-2" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="bi bi-info-circle"></i> Mostrar ayuda
+                            </button>
+                            <div class="collapse" id="collapseExample">
+                                <div class="card card-body mt-3">
+                                    <p>
+                                        En Try&Catch puedes formular preguntas utilizando Markdown, asi puedes definir un
+                                        formato más legible en tus publicaciones. A continuación te mostramos una pequeña guía:
+                                    </p>
+                                    <div class="card card-body">
+                                        <div id="textMarkExample">
+                                            <p>## Así puedes escribir un encabezado</p>
+                                            <p>#### Si quieres uno mas pequeño o más grande puedes incluir mas o menos almohadillas</p>
+                                            
+                                            <p>**puedes resaltar un texto en negrita** o tambien __en cursiva__</p>
+
+                                            <p>otra de las características principales de Try&Catch es que puedes formatear codigo, te dejamos un ejemplo:</p> 
+                                        
+                                            <p class="m-0">```</p>
+                                            <p class="m-0">const numbers1 = [45, 4, 9, 16, 25];</p>
+                                            <p class="m-0">const numbers2 = numbers1.map(myFunction);</p>
+                                            <p></p>
+                                            <p class="m-0">function myFunction(value, index, array) {</p>
+                                            <p class="m-0">return value * 2;</p>
+                                            <p class="m-0">}</p>
+                                            <p class="m-0">```</p>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3">El resultado que obtendrás:</p>
+                                    <div class="card card-body">
+                                        <div>
+                                            <h2>Así puedes escribir un encabezado</h2>
+                                            <h4>Si quieres uno mas pequeño o más grande puedes incluir mas o menos almohadillas</h4>
+    
+                                            <p><strong>puedes resaltar un texto en negrita</strong> o tambien <i>en cursiva</i></p>
+    
+                                            <p>otra de las características principales de Try&Catch es que puedes formatear codigo, te dejamos un ejemplo:</p> 
+
+                                            <pre><code id="codeExap"></code></pre>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <button class="btn btn-sm btn-primary mt-2" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                            <i class="bi bi-info-circle"></i> Ocultar ayuda
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <textarea class="form-control" name="cuerpo" id="cuerpo" cols="78" rows="6"
+                                placeholder="Campo de pregunta (opcional)"></textarea>
+                        </div>
+                    </div>
+                    <div id="etiquetasDiv" class="ms-4 d-flex flex-wrap">
+
+                    </div>
+                    <div class="d-flex align-items-center p-4">
+                        <div class="input-group w-50">
+                            <input type="text" class="form-control" placeholder="Introduzca etiquetas..."
+                                aria-label="Introduzca etiquetas..." aria-describedby="button-addon2" id="etiquetas"
+                                name="etiquetas" maxlength="10">
+                            <span class="input-group-text justify-content-center " id="contador-etiqueta"
+                                style="min-width: 60px; max-width: 60px;">10/10</span>
+                            <button class="btn btn-outline-primary" type="button" id="button-addon2"><i
+                                    class="bi bi-plus-circle"></i></button>
+                            <div class="invalid-feedback">
+                                Debe de haber al menos una etiqueta
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column align-items-end mt-3">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center p-4 mb-2">
+                        <div>
+                            <input class="form-control" type="file" id="filedoc" name="filedoc">
+                        </div>
+                        <div class="ms-5 d-none" id="embebImgdiv">
+                            <input type="checkbox" id="embebImg" name="embebImg"> emmbeber
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3 ">
+                        <button id="continuarButton" type="submit" class="btn btn-secondary botonContinuar">
+                            Continuar <i class="bi bi-arrow-return-left"></i> </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        const code = hljs.highlight("\r\nconst numbers1 = [45, 4, 9, 16, 25];\r\n\r\nconst numbers2 = numbers1.map(myFunction);\r\n\r\nfunction myFunction(value, index, array) {\r\n\r\n   return value * 2;\r\n\r\n}\r\n", {language: 'javascript'})
+
+        console.log(code)
+        document.getElementById("codeExap").innerHTML = code.value
+        hljs.highlightAll();
+    </script>
+</div>

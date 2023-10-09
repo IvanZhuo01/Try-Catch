@@ -1,0 +1,19 @@
+<div th:fragment="borrarPregunta" class="modal fade" id="borrarPreguntaModal" tabindex="-1" aria-labelledby="borrarPreguntaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="borrarPreguntaModalLabel">Borrar Pregunta</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro de borrar la aportación?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form th:action="@{/admin/aportacion/}" method="post">
+                    <button type="submit" class="btn btn-danger">Borrar <i class="bi bi-trash"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

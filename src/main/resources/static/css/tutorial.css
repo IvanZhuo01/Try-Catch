@@ -1,0 +1,339 @@
+body {
+    background: linear-gradient(90deg, #B5CFD8 45.83%, #9FD3C7 100%);
+}
+
+.tutorial-container {
+    height: 475px;
+}
+
+.tutorial-container{
+    margin-top: -10px;
+}
+
+/* barra de progreso */
+.loadbar {
+    width: 100%;
+    height: 12px;
+    background-color: rgb(66, 71, 166, 0.3);
+}
+
+.progressbar {
+    width: 0%;
+    height: 12px;
+    background-color: rgb(66, 71, 166, 0.9);
+    border-radius: 0 20px 20px 0;
+    transition: width 0.4s ease-out;
+}
+
+/* Navbar de tutorial */
+.navbar {
+    background: white;
+    border-radius: 0px 0px 0px 0px;
+    font-family: 'Arvo', serif;
+    font-weight: bolder;
+}
+
+.container-fluid {
+    padding-top: 10px;
+    padding-bottom: -15px;
+}
+
+.container-fluid a {
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+}
+
+
+
+
+
+.navbar-text {
+    margin: 0 auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: lighter;
+    font-size: 0.7rem;
+    color: grey;
+    transition: color 0.2s ease;
+    border-radius: 10px;
+}
+
+.navbar-text:hover {
+    color:rgb(65, 105, 225);
+}
+
+.navbar-text:active{
+    background-color: whitesmoke;
+    transform: translateY(3px);
+}
+
+
+/* Aspectos genericos */
+.wrapper {
+    margin: 40px auto 0;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 90%;
+    padding: 0 30px 30px 30px;
+}
+
+.text-container .tutorial-1{
+    margin: 00px auto 0;
+}
+
+.text-container .tutorial-subtitle,
+.text-container .tutorial-title {
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.text-container .tutorial-title {
+    font-size: 25px;
+}
+
+
+/* Barra de busqueda */
+
+/* Ajustamos donde tiene que ir el boton de busqueda */
+.search-box {
+    width: 600px;
+    max-width: 100%;
+    margin: 50px auto;
+}
+
+.search-box input {
+    border-radius: 8px;
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+    background-color: whitesmoke;
+    padding-right: 120px;
+    appearance: none;
+}
+
+.search-box button {
+    border-radius: 12px;
+    right: 10px;
+}
+.search-btn{
+    margin-right:10px;
+}
+/* Universidades destacadas */
+.university-container {
+    margin: -20px 15px 10px 15px;
+    justify-content: space-between;
+}
+
+.university-container .tutorial-subtitle {
+    text-align: left;
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bolder;
+}
+.university-container .card-img-top {
+    width: 90%;
+    max-width: 100%;
+    height: auto;
+}
+
+
+.box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 96px;
+    border-radius: 15px;
+    background-color: whitesmoke;
+    text-align: center;
+}
+
+.university-container a {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.unis-card {
+    margin: 0 auto;
+    width: 300px;
+    height: 160px;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+}
+.unis-card img{
+    height: 90%;
+    width: 90%;
+}
+
+
+/* Seccion 2 */
+
+.warning {
+    top: -30px;
+}
+
+/* Seccion 3 */
+
+.preview-degree-card {
+    margin: 0 auto;
+    height: 160px;
+    min-width: 560px;
+    width: 580px;
+    max-width: 650px;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-degree-card img{
+
+    width: 250px;
+    height: 150px;
+}
+
+.card-title {
+    margin-left: 30px;
+}
+
+.form-select {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+/* Botones */
+
+.btn-container {
+    width: 600px;
+    max-width: 100%;
+    margin: 0 auto;
+    /* margin-top: -35px; */
+}
+
+.btn-container .common-btns {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.btn-container .common-btns.tutorial-1-btns {
+    display: flex;
+    justify-content: center;
+}
+
+.tutorial-1-btns {
+    margin-top: 20px;
+}
+
+.btn-container .common-btns button {
+    display: flex;
+    width: 180px;
+    height: 60px;
+    padding: 8px 8px;
+    justify-content: center;
+    align-items: center;
+
+    color: white;
+    background: rgb(65, 105, 225);
+
+    border: 0;
+    border-radius: 8px;
+    transition: 0.6 ease-in;
+    cursor: pointer;
+}
+
+.btn-container .common-btns button.prev-btn {
+    background: rgba(66, 71, 166, 0.5);
+}
+
+.btn-container .common-btns button.prev-btn i {
+    display: flex;
+    margin-right: 8px;
+}
+
+.btn-container .common-btns button.sig-btn i {
+    display: flex;
+    margin-left: 10px;
+}
+
+.btn-container .common-btns button.prev-btn:hover,
+.btn-container .common-btns button.sig-btn:hover {
+    background: rgba(255, 165, 0, 0.4);
+}
+
+/* Modales y notificaciones */
+/* Notificacion */
+.notif-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.notif-wrapper .sombreado {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease-in;
+}
+
+.notif-wrapper .msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+
+    transition: 0.3s ease-in;
+    font-size: 25px;
+
+    width: 60%;
+}
+
+.msg i {
+    margin-right: 10px;
+    color: #9FD3C7;
+    height: 25px;
+    width: 25px;
+}
+
+/* Modal */
+.modal {
+    display: block;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Estilos para el contenido del modal */
+.modal .modal-container {
+    background-color: #fefefe;
+    margin: 20% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    border-radius: 20px;
+}
+
+.botonContinuar {
+    border: none;
+    background-color: cornflowerblue;
+}
+
+.botonContinuar:hover {
+    cursor: pointer;
+    background-color: coral;
+}
+
+.selected {
+    border: 2px solid blue;
+}

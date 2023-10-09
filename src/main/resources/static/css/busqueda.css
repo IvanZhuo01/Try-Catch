@@ -1,0 +1,245 @@
+
+#busqueda{
+    padding-top: 3em;
+}
+
+.pregunta-card{
+    background-color: #fdf6eb;
+    padding: 1em;
+    margin-bottom: 1em;
+    cursor: pointer;
+
+    -webkit-box-shadow: inset 0px 4px 5px 0px rgba(0,0,0,0.17);
+    -moz-box-shadow: inset 0px 4px 5px 0px rgba(0,0,0,0.17);
+    box-shadow: inset 0px 4px 5px 0px rgba(0,0,0,0.17);
+}
+
+.pregunta-card .titulo{
+    font-weight: bold;
+    margin-bottom: .5em;
+    color: black;
+}
+
+.pregunta-card .asignatura{
+    font-size: .8em;
+}
+
+.pregunta-card .pregunta-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pregunta-card .pregunta-footer .izquierda{
+    display: flex;
+    align-items: center;
+}
+
+.pregunta-card .pregunta-footer .derecha span{
+    margin-left: .5em;
+}
+
+.pregunta-card .usuario{
+    background-color: #4f55c5;
+    padding: .2em .5em;
+    margin-right: .5em;
+    border-radius: 50%;
+
+    
+}
+
+.pregunta-card .usuario img{
+    height: 1.5em;
+    border-radius: 50%;
+}
+
+.pregunta-card .usuario .username{
+    color: white;
+}
+
+.pregunta-card .pregunta-footer .num-respuestas{
+    background-color: #f67f3b;
+    border-radius: 100px;
+    padding: .1em .5em;
+    position: relative;
+}
+
+.pregunta-card .pregunta-footer .num-respuestas span{
+    color: white;
+}
+
+.pregunta-card .pregunta-footer .num-respuestas i{
+    color: black;
+    position: absolute;
+    top: .8em;
+}
+
+
+
+.documento-card{
+    background-color: #fdf6eb;
+    padding: 1em;
+    margin-bottom: 1em;
+    display: flex;
+    position: relative;
+
+    -webkit-box-shadow: inset 0px 4px 5px 0px rgba(0,0,0,0.17);
+    -moz-box-shadow: inset 0px 4px 5px 0px rgba(0,0,0,0.17);
+    box-shadow: inset 0px 4px 5px 0px rgba(0,0,0,0.17);
+}
+
+.documento-card .documento img{
+    width: 100px;
+}
+
+.documento-card .derecha{
+    /* border: 1px solid red; */
+    width: 100%;
+    padding: .75em;
+    padding-left: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.documento-card .derecha .top .titulo{
+    font-weight: bold;
+    margin-bottom: .2em;
+}
+
+.documento-card .derecha .top .universidad{
+    font-size: 0.8em;
+}
+
+.documento-card .derecha .bottom{
+    font-size: 0.8em;
+}
+
+.documento-card .derecha .bottom .fecha{
+    color: red;
+}
+
+.documento-card .iconos{
+    position: absolute;
+    bottom: .5em;
+    right: .5em;
+    display: flex;
+}
+
+.documento-card .iconos i{
+    margin-left: .75em;
+    cursor: pointer;
+}
+
+
+.actividad-reciente-card{
+    background-color: #fdf6eb;
+    padding: 1em;
+    margin-bottom: 1em;
+    position: relative;
+
+    -webkit-box-shadow: inset 0px 4px 5px 0px rgba(0,0,0,0.17);
+    -moz-box-shadow: inset 0px 4px 5px 0px rgba(0,0,0,0.17);
+    box-shadow: inset 0px 4px 5px 0px rgba(0,0,0,0.17);
+}
+
+.actividad-reciente-card .body{
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.actividad-reciente-card .body .titulo{
+    font-weight: bold;
+    margin-bottom: .2em;
+    color: black;
+}
+
+.actividad-reciente-card .body .descripcion{
+    font-size: .8em;
+    color: black;
+}
+
+.actividad-reciente-card .body .tiempo{
+    font-size: .8em;
+    color: red;
+    font-weight: bold;
+}
+
+.actividad-reciente-card .footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.actividad-reciente-card .footer .num-respuestas{
+    background-color: #f67f3b;
+    color: white;
+    font-size: .8em;
+    border-radius: 100px;
+    padding: .1em .5em;
+}
+
+.actividad-reciente-card .footer .etiquetas span{
+    margin-left: .5em;
+}
+
+.espacio{
+    height: 1000px;
+}
+
+
+.boton-flotante{
+
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+
+    background-color: #f67f3b;
+    color: white;
+    padding: .25em 1em;
+
+    bottom: 1em;
+    right: 1em;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 100px;
+    max-width: 20em;
+    cursor: pointer;
+}
+
+.boton-flotante i{
+    font-size: 2.5em;
+}
+
+.boton-flotante span{
+    margin-left: 2em;
+}
+
+.titleLink{
+    text-decoration: none;
+}
+
+/* Crear Pregunta */
+
+.imgCrear{
+    width: 48px;
+    height: 48px;
+}
+.botonContinuar{
+    background-color: #4F55C6;
+    color:white
+}
+.botonContinuar:hover{
+    background-color: #1c26de;
+}
+.selector{
+    height: 50px;
+}
+
+.etiqueta:hover{
+    background-color: red !important;
+}

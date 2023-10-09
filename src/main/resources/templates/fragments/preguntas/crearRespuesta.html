@@ -1,0 +1,31 @@
+<div th:fragment="modalPregunta" class="modal fade" tabindex="-1" id="responder">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content backgroundModal">
+            <div class="modal-header">
+                <h5 class="modal-title" id="responderTitle">Respuesta</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" method="post" th:action="@{/preguntas/responder/__${pregunta.id}__}" enctype="multipart/form-data" id="crearformRes" novalidate>
+                    <div class="p-4">
+                        <div class="d-flex flex-row align-items-center justify-content-center me-4">
+                            <img th:src="@{/user/{id}/pic(id=${session.u.id})}" width="64" height="64" class="rounded-circle me-2" alt="user image">
+                            <p class="m-0" th:text="${session.u.username}">
+                               userName
+                            </p>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <textarea class="form-control" name="cuerpo" id="cuerpo" cols="78" rows="6"
+                                placeholder="Campo de respuesta" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-3 ">
+                        <button type="submit" class="btn btn-secondary botonContinuar" id="continuarButtonRes">
+                            Continuar <i class="bi bi-arrow-return-left"></i> </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

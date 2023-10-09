@@ -1,0 +1,30 @@
+<div th:fragment="modalPNotificacion" class="modal fade" tabindex="-1" id="notificacion">
+    <div class="modal-dialog modal-lg ">
+        <div class="modal-content backgroundModal">
+            <div class="modal-header">
+                <h5 class="modal-title">Notificacion</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation" method="post" th:action="@{/}" enctype="multipart/form-data" id="crearformNot" novalidate>
+
+                    <div class="p-4">
+                        <div class="d-flex align-items-center">
+                            <div class="w-100 input-group flex-nowrap">
+                                <h2 name="titulo" id="titulo"> </h2>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <textarea class="form-control" name="cuerpo" id="cuerpo" cols="78" rows="6"
+                                placeholder="cuerpo notificacion"></textarea>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3 ">
+                        <button id="continuarButton" type="submit" class="btn btn-secondary botonContinuar">
+                            Continuar <i class="bi bi-arrow-return-left"></i> </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
